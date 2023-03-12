@@ -1,0 +1,16 @@
+.wrap {
+	float: left;
+	margin: 15px;
+	display: inline;
+}
+
+img[html] {
+	height: auto;
+	width: auto;
+}
+
+.wrap2 {
+	float: right;
+}
+
+/* Вторая картиночка у меня не получилась 🥲

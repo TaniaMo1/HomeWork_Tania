@@ -1,0 +1,7 @@
+.bg-box {
+    background-image: url(house.jpg), url(lamp.png), url(hedgehog.jpg), url(grass.png), url(donut.jpg);
+    background-size: auto, 60px 80px, 30px 30px, 300px 300px, 40px 40px;
+    background-color: green;
+    background-repeat: no-repeat, repeat-x, repeat-y, repeat-x, repeat-y;
+    background-position: center, center top, left center, center bottom, right center;
+}

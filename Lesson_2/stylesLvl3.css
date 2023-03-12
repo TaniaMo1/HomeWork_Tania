@@ -1,0 +1,24 @@
+h3 {
+  color: pink;
+  }
+
+#greycol {
+  color: grey;
+  }
+
+.text-box div p:nth-child(1) {
+    color: red;
+  }
+
+.text-box p:nth-child(6) {
+    color: green;
+  }
+
+h3[title] {
+    color: blue;
+  }
+
+.yellow {
+  color: yellow;
+  }
+
