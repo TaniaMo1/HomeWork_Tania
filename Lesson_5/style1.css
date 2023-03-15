@@ -42,39 +42,47 @@ q:before, q:after {
 
 /* OWN STYLES */
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+body,
+html {
+  height: 100%;
 }
 
 header {
   display: flex;
-  align-items: flex-start;
-  padding: 10px 20px;
-  background-color: #b96e39;
-
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(184, 159, 18);
+  width: 100%;
 }
 
-nav {
+.logo {
+    width: 13%;
+    padding: 25px;
+}
+
+.nav-menu {
     display: flex;
-    align-self: center;
-    margin-left: auto;
+    flex-direction: row;
+    font-size: 15px;
+    gap: 0 10px;
+    padding: 25px;
 }
 
-nav>div {
-    float: 0auto;
-    margin-right: 20px;
+.wrap {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-h2 {
-    display: block;
-    text-align: center;
-    width: 100%;
-    margin: 30px;
-    font-weight: 5px bolder;
-    font-size: large;
-    color: black;
+.main-container {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.main {
+    display: flex;
+    flex-grow: 2;
+    order: 2;
 }
 
 .container {
@@ -87,87 +95,105 @@ h2 {
     min-height: 100vh;
 }
 
-main {
+.container-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+.container-box_text {
+    text-align: center;
+    margin-top: 20px;
+    line-height: 20px;
+}
+  
+.container-box_header {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.container-box_wrap {
     display: flex;
     flex-wrap: wrap;
-    flex: 1 1 auto;
-    margin: 0px 0px 0 0px;
-    padding: 10px;
-    flex-grow: 1;
-
+    margin: 20px 10px 20px 10px;
+    justify-content: center;
+    gap: 15px 15px;
 }
 
-.content {
-    flex-basis: calc(30% - 5px);
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 7px;
-    width: 100px;
-    height: 250px;
-    border: 2px solid rgb(238, 129, 89);
-    border-radius: 20px;
+.container-box_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
+    border: 2px solid rgb(128, 83, 128);
+    border-radius: 15px;
+    max-width: 270px;
+    min-height: 310px;
 }
 
-
-.content img {
-    display: block;
-    margin: 0 auto;
-    width: 70px;
-    height: 70px;
-    border: 14px solid rgb(238, 129, 89);
-    border-radius: 50%;
+.container-box_content:hover {
+    color: rgb(227, 188, 81);
 }
 
-.content p {
-    margin: 5px;
-    font-weight: bold;
+.container-box_content img {
+    margin-top: 5%;
+    width: 60px;
+    height: 60px;
+    border: 8px solid rgb(203, 124, 33);
+    border-radius: 100px;
 }
 
-.content span {
-    display: block;
-    text-align: center;
-    padding: 5px;
+.container-box_content p {
+    margin-top: 5%;
+    font-weight: 600;
+}
+
+.container-box_content span {
+    margin-top: 5%;
+    line-height: 20px;
 }
 
 button {
-    background-color: violet;
-    color: white;
-    border-radius: 20px;
+    display: inline-block;
+    text-decoration: none;
     padding: 10px 20px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
+    color: white;
+    background-color: rgb(219, 130, 42);
+    border-radius: 50px;
+    margin-bottom: 15px;
+}
 
 .left-sidebar {
-    flex: 1 0 auto;
-    width: 160px;
-    padding: 10px;
-    background-color: rgb(203, 132, 202);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    order: 1;
+    min-width: 210px;
+    background-color: rgb(221, 160, 221);
+}
+
+.left-sidebar p {
+    padding: 15px;
 }
 
 .right-sidebar {
-    flex: 1 0 auto;
-    width: 160px;
-    padding: 10px;
-    background-color: rgb(90, 161, 187);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    order: 3;
+    min-width: 210px;
+    background-color: rgb(126, 153, 172);
 }
 
-.advertising {
-  padding: 10px;
-  margin-bottom: 20px;
+.right-sidebar p {
+    padding: 15px;
 }
 
 footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  padding: 15px;
-  background-color: #80eca8;
-  color: #000000;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(149, 245, 140);
 }
 
+footer p {
+    padding: 15px;
+}
