@@ -1,0 +1,22 @@
+html {
+    background-color: black
+}
+
+h1 {
+    color: white;
+    letter-spacing: 3px;
+    text-align: center
+}
+
+p {
+    font-style: italic;
+    font-size: 35px;
+    padding: 20px 50px 20px;
+    color: greenyellow;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}

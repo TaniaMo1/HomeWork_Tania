@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+        <link rel="stylesheet" href="style6.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>Название формы</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Страна:</label>
+                    <select id="country" name="country">
+                        <option value="Украина">Украина</option>
+                        <option value="Польша">Польша</option>
+                        <option value="Германия">Германия</option>
+                        <option value="Франция">Франция</option>
+                        <option value="Другая">Другая</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Выберите варианты:</label>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="option1">Вар 1</label>
+                        <label><input type="checkbox" name="option2">Вар 2</label>
+                        <label><input type="checkbox" name="option3">Вар 3</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+            </form>
+        </div>
+        <button type="submit">Отправить</button>
+    </body>
+</html>
