@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>flats</title>
+</head>
+<body>
+    <script>
+    var floors = parseInt(prompt("Введите количество этажей в доме:"));
+    var flatsPerFloor = parseInt(prompt("Введите количество квартир на этаже:"));
+    var flatNumber = parseInt(prompt("Введите нужный вам номер квартиры:"));
+
+    entranceNumber = Math.ceil(flatNumber / (floors * flatsPerFloor));
+    floorNumber = Math.ceil((flatNumber % (floors * flatsPerFloor)) / flatsPerFloor);
+
+    alert("Квартира #" + flatNumber + " находится на " + entranceNumber + " подъезде, " + floorNumber + "-м этаже");
+    </script>
+</body>
+</html>

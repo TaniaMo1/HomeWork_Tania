@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RGB</title>
+</head>
+<body>
+    <script>
+        var red = parseInt(prompt("Введите значение красного цвета (0-255):"));
+        var green = parseInt(prompt("Введите значение зеленого цвета (0-255):"));
+        var blue = parseInt(prompt("Введите значение синего цвета (0-255):"));
+
+        var hex = "#" + red.toString(16).padStart(2, "0") + green.toString(16).padStart(2, "0") + blue.toString(16).padStart(2, "0");
+
+        alert("CSS-колір: " + hex);
+        document.body.style.backgroundColor = hex;
+    </script>
+</body>
+</html>
