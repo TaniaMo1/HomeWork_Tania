@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube</title>
+  </head>
+  <body>
+    <script>
+        const regex = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const input = prompt('Введіть текст із посиланням на YouTube:');
+        const match = input.match(regex);
+        if (match) {
+          const videoId = match[1];
+          const embedCode = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          document.write(embedCode);
+        } else {
+          alert('Посилання на YouTube не знайдено!');
+        }
+    </script>
+  </body>
+</html>

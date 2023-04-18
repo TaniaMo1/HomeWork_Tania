@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beer</title>
+  </head>
+  <body>
+    <script>
+      let str = "Було жарко. Василь пив пиво вприкуску з креветками";
+      let words = str.split(" ");
+
+      for (let i = 0; i < words.length; i++) {
+        if (words[i] === "пиво") {
+          words[i] = "чай";
+        }
+      }
+
+      let result = words.join(" ");
+      console.log(result);
+    </script>
+  </body>
+</html>
