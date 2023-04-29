@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>romptOr</title>
+  </head>
+  <body>
+    <script>
+      let age = prompt("Введите свой возраст");
+
+      if (age === "" || age === null) {
+        alert("Ошибка, Вы не ввели возраст");
+      } else if (isNaN(age)) {
+        alert ("Ошибка! Вы ввели некорректное значение");
+      } else {
+        age = Number(age);
+        alert(`Ваш возраст ${age}`)
+      }
+    </script>
+  </body>
+</html>

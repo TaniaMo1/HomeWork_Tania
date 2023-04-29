@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>booleanIf</title>
+  </head>
+  <body>
+    <script>
+      let answer1 = confirm ("Вы любите пиво?");
+      let answer2 = confirm ("Вы любите мясо?");
+      let answer3 = confirm ("Вы любите женщин");
+
+      if (answer1 && answer2 && answer3) {
+        alert ("Вы настоящий мужчина!");
+      } else if (!answer1 && !answer2 && !answer3){
+        alert ("Вы настоящая женщина!");
+      } else {
+        alert ("Вы не совсем понятны...");
+      };
+    </script>
+  </body>
+</html>

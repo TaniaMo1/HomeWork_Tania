@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>odd</title>
+  </head>
+  <body>
+    <script>
+      let numString = prompt("Введіть число:");
+      let num = Number(numString);
+
+      if (isNaN(num)) {
+        alert("Невірний формат числа");
+      } else {
+        if (num % 2 === 0) {
+          alert(num + " є парним числом");
+        } else {
+          alert(num + " не є парним числом");
+        }
+      }
+    </script>
+  </body>
+</html>

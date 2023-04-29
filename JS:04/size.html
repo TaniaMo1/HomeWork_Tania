@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>booleanIf</title>
+  </head>
+  <body>
+    <script>
+      let type = prompt("Выберите тип одежды: верхняя одежда, женское белье, чулки и носки");
+      let size = prompt("Введите размер (Украина)");
+
+      if (type === "верхняя одежда") {
+        if (size >= 40) {
+          alert("Размер S в международной системе");
+        } else if (size = 42 && size <= 44) {
+          alert("Размер М в международной системе");
+        } else if (size = 46 && size <= 48) {
+          alert("Размер L в международной системе");
+        } else if (size = 50 && size <= 52) {
+          alert("Размер XL в международной системе");
+        } else if (size = 54) {
+          alert("Размер XXL в международной системе");
+        } else {
+          alert("Размер не найден в американской системе");
+        }
+      } else if (type === "женское белье") {
+        if (size <= 42) {
+          alert("Размер XXS в международной системе");
+        } else if (size <= 44) {
+          alert("Размер XS в международной системе");
+        } else if (size <= 46) {
+          alert("Размер S в международной системе");
+        } else if (size <= 48) {
+          alert("Размер М в международной системе");
+        } else if (size <= 50) {
+          alert("Размер L в международной системе");
+        } else if (size <= 52) {
+          alert("Размер XL в международной системе");
+        } else if (size <= 54) {
+          alert("Размер XXL в международной системе");
+        } else if (size <= 56) {
+          alert("Размер XXXL в международной системе");
+        } else {
+          alert("Размер не найден в международной системе");
+        }
+      } else if (type === "чулки и носки") {
+        if (size >= 21) {
+          alert("Размер 8 в американской системе");
+        } else if (size >= 23) {
+          alert("Размер 9 в американской системе");
+        } else if (size >= 25) {
+          alert("Размер 10 в американской системе");
+        } else if (size >= 27) {
+          alert("Размер 11 в американской системе");
+        } else {
+          alert("Размер не найден в американской системе");
+        }
+      } else {
+        alert("Некорректный тип одежды");
+      }
+    </script>
+  </body>
+</html>

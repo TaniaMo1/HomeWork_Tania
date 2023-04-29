@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lexics</title>
+  </head>
+  <body>
+    <script>
+      const badWords = ['мат', 'матюк'];
+      let text = prompt("Введите текст:");
+
+      let foundBadWord = false;
+
+      for (let i = 0; i < badWords.length; i++) {
+        if (text.toLowerCase().indexOf(badWords[i]) !== -1) {
+          foundBadWord = true;
+          break;
+        }
+      }
+
+      if (foundBadWord) {
+        alert("Текст содержит некорректные слова");
+      } else {
+        alert("Текст корректный");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>all</title>
+  </head>
+  <body>
+    <script>
+      let task = prompt("Введите название задачи, которую хотите запустить: odd, lexics, boolean, booleanIf, sizes, ternary, PromptOr, confirmOrThisDay, confirmIfThisDay, defautOr, defaultIf, logPass, scissors, currencyEx").toLowerCase();
+
+      if (task === "odd") {
+        let numString = prompt("Введіть число:");
+        let num = Number(numString);
+
+        if (isNaN(num)) {
+          alert("Невірний формат числа");
+        } else {
+          if (num % 2 === 0) {
+            alert(num + " є парним числом");
+          } else {
+            alert(num + " не є парним числом");
+          }
+        }
+      } else if (task === "lexics") {
+          const badWords = ['мат', 'матюк'];
+          let text = prompt("Введите текст:");
+
+          let foundBadWord = false;
+
+          for (let i = 0; i < badWords.length; i++) {
+            if (text.toLowerCase().indexOf(badWords[i]) !== -1) {
+              foundBadWord = true;
+              break;
+            }
+          }
+
+          if (foundBadWord) {
+            alert("Текст содержит некорректные слова");
+          } else {
+            alert("Текст корректный");
+          }
+      } else if (task === "boolean") {
+          let answer1 = confirm ("Вы любите пиво?");
+          let answer2 = confirm ("Вы любите мясо?");
+          let answer3 = confirm ("Вы любите сладкое?");
+          alert(`Ответ на первый вопрос ${answer1} \nOтвет на второй вопрос ${answer2} \nOтвет на третий вопрос ${answer3}`);
+      } else if (task === "booleanif") {
+          let answer1 = confirm ("Вы любите пиво?");
+          let answer2 = confirm ("Вы любите мясо?");
+          let answer3 = confirm ("Вы любите женщин");
+
+          if (answer1 && answer2 && answer3) {
+            alert ("Вы настоящий мужчина!");
+          } else if (!answer1 && !answer2 && !answer3){
+            alert ("Вы настоящая женщина!");
+          } else {
+            alert ("Вы не совсем понятны...");
+          };
+      } else if (task === "sizes") {
+          let type = prompt("Выберите тип одежды: верхняя одежда, женское белье, чулки и носки");
+          let size = prompt("Введите размер (Украина)");
+
+          if (type === "верхняя одежда") {
+            if (size >= 40) {
+              alert("Размер S в международной системе");
+            } else if (size = 42 && size <= 44) {
+              alert("Размер М в международной системе");
+            } else if (size = 46 && size <= 48) {
+              alert("Размер L в международной системе");
+            } else if (size = 50 && size <= 52) {
+              alert("Размер XL в международной системе");
+            } else if (size = 54) {
+              alert("Размер XXL в международной системе");
+            } else {
+              alert("Размер не найден в американской системе");
+            }
+          } else if (type === "женское белье") {
+            if (size <= 42) {
+              alert("Размер XXS в международной системе");
+            } else if (size <= 44) {
+              alert("Размер XS в международной системе");
+            } else if (size <= 46) {
+              alert("Размер S в международной системе");
+            } else if (size <= 48) {
+              alert("Размер М в международной системе");
+            } else if (size <= 50) {
+              alert("Размер L в международной системе");
+            } else if (size <= 52) {
+              alert("Размер XL в международной системе");
+            } else if (size <= 54) {
+              alert("Размер XXL в международной системе");
+            } else if (size <= 56) {
+              alert("Размер XXXL в международной системе");
+            } else {
+              alert("Размер не найден в международной системе");
+            }
+          } else if (type === "чулки и носки") {
+            if (size >= 21) {
+              alert("Размер 8 в американской системе");
+            } else if (size >= 23) {
+              alert("Размер 9 в американской системе");
+            } else if (size >= 25) {
+              alert("Размер 10 в американской системе");
+            } else if (size >= 27) {
+              alert("Размер 11 в американской системе");
+            } else {
+              alert("Размер не найден в американской системе");
+            }
+          } else {
+            alert("Некорректный тип одежды");
+          }
+      } else if (task === "ternary") {
+          let isWoman = confirm("Вы женщина?");
+          let message = isWoman ? "Вы женщина" : "Вы мужчина";
+
+          alert(message);
+      } else if (task === "promptor") {
+          let age = prompt("Введите свой возраст");
+
+          if (age === "" || age === null) {
+            alert("Ошибка, Вы не ввели возраст");
+          } else if (isNaN(age)) {
+            alert ("Ошибка! Вы ввели некорректное значение");
+          } else {
+            age = Number(age);
+            alert(`Ваш возраст ${age}`)
+          }
+      } else if (task === "confirmorthisday") {
+          let shopping = confirm("Шоппинг?") || alert("Ты - бяка");
+      } else if (task === "confirmifthisday") {
+          let shopping = confirm("Шоппинг?")
+          if (!shopping) {
+            alert("Ты - бяка");
+          }   
+      } else if (task === "defautor") {
+          let firstName = prompt("Введите имя:") || "Анон";
+          let lastName = prompt("Введите фамилию:") || "Анонимов";
+          let fatherName = prompt("Введите отчество:") || "Анонимович";
+
+          alert(`${lastName} ${firstName} ${fatherName}`);
+      } else if (task === "defaultif") {
+          let firstName = prompt("Введите имя:") || "Анон";
+          let lastName = prompt("Введите фамилию:") || "Анонимов";
+          let fatherName = prompt("Введите отчество:") || "Анонимович";
+
+          if (firstName === "" || firstName === null) {
+            firstName = "Анон";
+          }
+
+          if (lastName === "" || lastName === null) {
+            lastName = "Анонимов";
+          }
+
+          if (fatherName === "" || fatherName === null) {
+            fatherName = "Анонимович";
+          }
+
+          alert(`Привет, ${lastName} ${firstName} ${fatherName}!`);
+      } else if (task === "logpass") {
+          let login = prompt("Введите логин:", "");
+          if (login === "admin") {
+            let password = prompt("Введите пароль:", "");
+            if (password === "qwerty") {
+              alert("Добро пожаловать, admin!");
+            } else {
+              alert("Пароль неверный.");
+            }
+          } else {
+            alert("Логин неверный.")
+        }
+      } else if (task === "scissors") {
+          let userChoice = prompt("Введите свой выбор: камень, ножницы или бумага").toLowerCase();
+          let computerChoice = Math.random();
+
+          if (computerChoice < 0.34) {
+            computerChoice = "камень";
+          } else if (computerChoice <= 0.67) {
+            computerChoice = "ножницы";
+          } else {
+            computerChoice = "бумага";
+          }
+
+          alert("Компьютер выбрал: " + computerChoice);
+
+          if (userChoice === computerChoice) {
+            alert("Ничья!");
+          } else if (userChoice === "камень") {
+            if (computerChoice === "ножницы") {
+              alert("Вы победили!");
+            } else {
+              alert("Компьютер победил!");
+            }
+          } else if (userChoice === "ножницы") {
+            if (computerChoice === "бумага") {
+              alert("Вы победили!");
+            } else {
+              alert("Компьютер победил!");
+            }
+          } else if (userChoice === "бумага") {
+            if (computerChoice === "камень") {
+              alert("Вы победили!");
+            } else {
+              alert("Компьютер победил!");
+            }
+          } else {
+            alert("Вы ввели неправильный выбор, игра завершена!");
+          }
+      } else if (task === "currencyex") {
+          let currency = prompt("Введите валюту (например, USD, EUR):").toUpperCase();
+
+          const apiKey = "pzOf2ngPHPQCjN8jw5Gyt0GNEvYbqTuz";
+          const apiUrl = `https://api.apilayer.com/exchangerates_data/convert?to=UAH&from=${currency}&amount=1&apikey=${apiKey}`;
+
+          fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+              let rate = data.result;
+
+              let isBuying = confirm("Желаете купить эту валюту?");
+
+              if (!isBuying) {
+                rate = 1 / rate;
+              }
+
+              let amount = parseFloat(prompt("Введите сумму для обмена:"));
+
+              if (isNaN(amount)) {
+                alert("Введите корреткную сумму!");
+                return;
+              }
+
+              let result = amount * rate;
+              alert(`Вы получите ${result.toFixed(2)} ${isBuying ? "UAH" : currency}`);
+            })
+            .catch((error) => {
+              console.log(error);
+              alert("Произошла ошибка, попробуйте позже!");
+            });
+      } else {
+        alert("Введите корреткно задание!");
+      }
+    </script>
+  </body>
+</html>

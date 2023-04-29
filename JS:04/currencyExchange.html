@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currencyEx</title>
+  </head>
+  <body>
+    <script>
+      let currency = prompt("Введите валюту (например, USD, EUR):").toUpperCase();
+
+      const apiKey = "pzOf2ngPHPQCjN8jw5Gyt0GNEvYbqTuz";
+      const apiUrl = `https://api.apilayer.com/exchangerates_data/convert?to=UAH&from=${currency}&amount=1&apikey=${apiKey}`;
+
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          let rate = data.result;
+
+          let isBuying = confirm("Желаете купить эту валюту?");
+
+          if (!isBuying) {
+            rate = 1 / rate;
+          }
+
+          let amount = parseFloat(prompt("Введите сумму для обмена:"));
+
+          if (isNaN(amount)) {
+            alert("Введите корреткную сумму!");
+            return;
+          }
+
+          let result = amount * rate;
+          alert(`Вы получите ${result.toFixed(2)} ${isBuying ? "UAH" : currency}`);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Произошла ошибка, попробуйте позже!");
+        });
+    </script>
+  </body>
+</html>

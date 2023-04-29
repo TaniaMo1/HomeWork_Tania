@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scissors</title>
+  </head>
+  <body>
+    <script>
+      let userChoice = prompt("Введите свой выбор: камень, ножницы или бумага").toLowerCase();
+      let computerChoice = Math.random();
+
+      if (computerChoice < 0.34) {
+        computerChoice = "камень";
+      } else if (computerChoice <= 0.67) {
+        computerChoice = "ножницы";
+      } else {
+        computerChoice = "бумага";
+      }
+
+      alert("Компьютер выбрал: " + computerChoice);
+
+      if (userChoice === computerChoice) {
+        alert("Ничья!");
+      } else if (userChoice === "камень") {
+        if (computerChoice === "ножницы") {
+          alert("Вы победили!");
+        } else {
+          alert("Компьютер победил!");
+        }
+      } else if (userChoice === "ножницы") {
+        if (computerChoice === "бумага") {
+          alert("Вы победили!");
+        } else {
+          alert("Компьютер победил!");
+        }
+      } else if (userChoice === "бумага") {
+        if (computerChoice === "камень") {
+          alert("Вы победили!");
+        } else {
+          alert("Компьютер победил!");
+        }
+      } else {
+        alert("Вы ввели неправильный выбор, игра завершена!");
+      }
+    </script>
+  </body>
+</html>
