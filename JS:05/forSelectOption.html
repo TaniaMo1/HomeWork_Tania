@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forSelectOption</title>
+  </head>
+  <body>
+    <script>
+      const currencies = ["USD", "EUR", "GBP", "UAH"]
+      let   str = "<select>"
+
+      for (const currency of currencies) {
+        str += `<option>${currency}</option>`;
+      }
+
+      str+= "</select>"
+
+      document.write(str)
+    </script>
+    </script>
+  </body>
+</html>

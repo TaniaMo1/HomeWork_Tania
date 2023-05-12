@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>destruct</title>
+  </head>
+  <body>
+    <script>
+      const userInput = prompt('Введите строку:');
+      const letters = [...userInput.replace(/[\s\d]/g, '')];
+
+      const firstLetter = letters[0];
+      const fifthLetter = letters[4];
+      const ninthLetter = letters[8];
+
+      alert(`Первая буква: ${firstLetter}, пятая буква: ${fifthLetter}, девятая буква: ${ninthLetter}`);
+      //ввела игнор цифр и пробелов, так как в задание написано конкретно за буквы
+    </script>
+    </script>
+  </body>
+</html>

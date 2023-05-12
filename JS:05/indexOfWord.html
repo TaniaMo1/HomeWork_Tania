@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multiplyTableSlice</title>
+  </head>
+  <body>
+    <script>
+      let inputString = prompt("Введите рядок из строк:");
+      let searchWord = prompt("Введити слово для поиска:")
+      let wordsArray = inputString.split(' ');
+      let wordIndex = wordsArray.indexOf(searchWord);
+
+      if (wordIndex === -1) {
+        alert('Слово не найдено');
+      } else {
+        alert(`Слово "${searchWord}" находится на позиции ${wordIndex + 1}`);
+      }
+
+    </script>
+  </body>
+</html>

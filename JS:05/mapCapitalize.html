@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mapcCapitalize</title>
+  </head>
+  <body>
+    <script>
+      const capitalize = str => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
+      const inputString = prompt("Введите строку:");
+      const word = inputString.split(" ");
+      const capitalizedWords = word.map(capitalize);
+      const result = capitalizedWords.join(" ");
+
+      alert(result)
+    </script>
+  </body>
+</html>
+

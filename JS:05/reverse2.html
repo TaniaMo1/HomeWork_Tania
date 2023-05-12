@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reverse2</title>
+  </head>
+  <body>
+    <script>
+      let arr1 = [1, 2, 3, 4, 5];
+      let arr2 = [];
+
+      while (arr1.length > 0) {
+        arr2.push(arr1.pop());
+      }
+
+      while (arr2.length > 0) {
+        arr1.push(arr2.shift());
+      }
+
+      alert(arr1);
+    </script>
+  </body>
+</html>

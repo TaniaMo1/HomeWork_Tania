@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filterLexics</title>
+  </head>
+  <body>
+    <script>
+      const inputString = prompt("Введите строку:");
+      const badWords = ["мат", "матюк", "грубость"];
+
+      const filteredWords = inputString.split(" ").filter(word => !badWords.includes(word));
+
+      const result = filteredWords.join(" ");
+
+      alert(result)
+    </script>
+  </body>
+</html>
+

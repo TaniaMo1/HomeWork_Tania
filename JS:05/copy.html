@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>copy</title>
+  </head>
+  <body>
+    <script>
+      const multiplicationTable = [];
+
+        for (let i = 1; i <= 10; i++) {
+          const row = [];
+
+          for (let j = 1; j <= 10; j++) {
+            const result = i * j;
+
+            if (result !== 0) {
+              row.push(result);
+            }
+          }
+
+          multiplicationTable.push(row);
+        }
+
+      const nonZeroMultiplicationTable = multiplicationTable.map(row => row.slice());
+
+      console.log(nonZeroMultiplicationTable);
+    </script>
+  </body>
+</html>

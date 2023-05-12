@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>destructDefault</title>
+  </head>
+  <body>
+    <script>
+      const userInput = prompt('Введите строку:');
+      const [, secondLetter = "!", , fourthLetter = "!", fifthLetter = "!"] = userInput;
+
+      alert(`Вторая буква: ${secondLetter}, четвертая буква: ${fourthLetter}, пятая буква: ${fifthLetter}`);
+    </script>
+    </script>
+  </body>
+</html>

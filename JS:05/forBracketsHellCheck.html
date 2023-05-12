@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forBracketsHellCheck</title>
+  </head>
+  <body>
+    <script>
+      const line = prompt();
+      const bracketsStack = [];
+      let i = 0;
+      let errorPosition = -1;
+
+      for (const character of line) {
+        if (character === "[" || character === "(" || character === "{") {
+          bracketsStack.push({ character, index: i });
+        } else if (character === "]" || character === ")" || character === "}") {
+          if (bracketsStack.length === 0) {
+            errorPosition = i;
+            break;
+          }
+
+          const lastBracket = bracketsStack.pop();
+          const openingBracket = getOpeningBracket(character);
+
+          if (lastBracket.character !== openingBracket) {
+            errorPosition = lastBracket.index;
+            break;
+          }
+        }
+
+        i++;
+      }
+
+      if (bracketsStack.length === 0 && errorPosition === -1) {
+        alert("Brackets are balanced!");
+      } else if (errorPosition === -1) {
+        const lastBracket = bracketsStack.pop();
+        errorPosition = lastBracket.index;
+        alert(`Error: Unclosed bracket at position ${errorPosition}`);
+      } else {
+        alert(`Error: Mismatched brackets at position ${errorPosition}`);
+      }
+
+      function getOpeningBracket(closingBracket) {
+        switch (closingBracket) {
+          case "]":
+            return "[";
+          case ")":
+            return "(";
+          case "}":
+            return "{";
+          default:
+            return "";
+        }
+      }
+    </script>
+  </body>
+</html>
+

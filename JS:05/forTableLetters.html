@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forTableLetters</title>
+  </head>
+  <body>
+    <script>
+      const currencies = ["USD", "EUR", "GBP", "UAH"];
+      let str = "<table style='border-collapse: collapse;'>";
+      str += "<tr>";
+
+      for (const currency of currencies) {
+        for (const letter of currency) {
+          str += `<td style='border: 1px solid black; padding: 5px;'>${letter}</td>`;
+        }
+        str += "</tr><tr>";
+      }
+
+      str += "</tr></table>";
+
+      document.write(str);
+    </script>
+  </body>
+</html>
+
