@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parent</title>
+  </head>
+  <body>
+    <script>
+      var structure = {
+      tagName: "body",
+      children: [
+        {
+          tagName: "div",
+          parent: null,
+          children: [
+            {
+              tagName: "span",
+              parent: null,
+              children: ["Enter a data please:"]
+            },
+            {
+              tagName: "br",
+              parent: null
+            },
+            {
+              tagName: "input",
+              attrs: {
+                type: "text",
+                id: "name"
+              },
+              parent: null
+            },
+            {
+              tagName: "input",
+              attrs: {
+                type: "text",
+                id: "surname"
+              },
+              parent: null
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          parent: null,
+          children: [
+            {
+              tagName: "button",
+              attrs: {
+                id: "ok"
+              },
+              parent: null,
+              children: ["OK"]
+            },
+            {
+              tagName: "button",
+              attrs: {
+                id: "cancel"
+              },
+              parent: null,
+              children: ["Cancel"]
+            }
+          ]
+        }
+      ]
+    };
+
+    // Встановлення зв'язків батьків
+    function setParent(node, parent) {
+      node.parent = parent;
+      if (node.children) {
+        node.children.forEach(child => setParent(child, node));
+      }
+    }
+
+    // Виклик функції для встановлення зв'язків батьків
+    setParent(structure, null);
+
+    console.log(structure);
+    </script>
+  </body>
+</html>

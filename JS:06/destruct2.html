@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>destruct2</title>
+  </head>
+  <body>
+    <script>
+      let obj = {name: 'Ivan',
+                surname: 'Petrov',
+                children: [{name: 'Maria'}, {name: 'Nikolay'}]}
+                
+      let {children: [{name: name1}, {name: name2}]} = obj;
+
+      console.log('name1:', name1);
+      console.log('name2:', name2);
+    </script>
+  </body>
+</html>

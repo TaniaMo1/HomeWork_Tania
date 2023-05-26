@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>destructString</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 4, 5, "a", "b", "c"];
+
+      let evenArr = arr.filter((item) => typeof item === "number" && item % 2 === 0);
+      let oddArr = arr.filter((item) => typeof item === "number" && item % 2 !== 0);
+      let letterArr = arr.filter((item) => typeof item === "string");
+
+      let [even1, even2] = evenArr;
+      let [odd1, odd2, odd3] = oddArr;
+
+      console.log("Even numbers:", even1, even2);
+      console.log("Odd numbers:", odd1, odd2, odd3);
+      console.log("Letters:", letterArr);
+    </script>
+  </body>
+</html>

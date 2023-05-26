@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>literalsCopy</title>
+  </head>
+  <body>
+    <script>
+      function promptValue(promptMessage) {
+        return prompt(promptMessage);
+      }
+
+      function addPropertyToObject(obj, property, itemType) {
+        const value = promptValue(`Введіть значення для властивості "${property}" (${itemType}):`);
+        obj[property] = value;
+      }
+
+      const items = [
+        {
+          вид: "платье",
+          материал: "котон",
+          цвет: "белый",
+          размер: "S"
+        },
+        {
+          вид: "юбка",
+          материал: "джинс",
+          цвет: "синий",
+          размер: "М"
+        },
+        {
+          вид: "блуза",
+          материал: "лен",
+          цвет: "голубой",
+          размер: "S"
+        }
+      ];
+
+      const commonProperty = promptValue("Введіть назву спільної властивості:");
+      const itemType = promptValue("Введіть тип вида (платье, юбка, блуза):");
+
+      for (const item of items) {
+        addPropertyToObject(item, commonProperty, itemType);
+      }
+
+      console.log(items);
+    </script>
+  </body>
+</html>

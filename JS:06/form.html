@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <body>
+      <form>
+        <label>Name: <input type="text" name="Name" value="chevrolet chevelle malibu"></label>
+        <label>Cylinders: <input type="number" name="Cylinders" value="8"></label>
+        <label>Displacement: <input type="number" name="Displacement" value="307"></label>
+        <label>Horsepower: <input type="number" name="Horsepower" value="130"></label>
+        <label>Weight_in_lbs: <input type="number" name="Weight_in_lbs" value="3504"></label>
+        <label>Origin: <input type="text" name="Origin" value="USA"></label>
+        <label>in_production: <input type="checkbox" name="in_production"></label>
+      </form>      
+    <script>
+      const car = {
+        "Name": "chevrolet chevelle malibu",
+        "Cylinders": 8,
+        "Displacement": 307,
+        "Horsepower": 130,
+        "Weight_in_lbs": 3504,
+        "Origin": "USA",
+        "in_production": false
+      };
+
+      const form = document.createElement("form");
+
+      for (const key in car) {
+        const label = document.createElement("label");
+        label.textContent = `${key}: `;
+        
+        const input = document.createElement("input");
+        input.name = key;
+        
+        if (typeof car[key] === "number") {
+          input.type = "number";
+          input.value = car[key];
+        } else if (typeof car[key] === "string") {
+          input.type = "text";
+          input.value = car[key];
+        } else if (typeof car[key] === "boolean") {
+          input.type = "checkbox";
+          input.checked = car[key];
+        }
+        
+        label.appendChild(input);
+        form.appendChild(label);
+      }
+
+      document.body.appendChild(form);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table</title>
+    <body>
+    <script>
+      const persons = [
+        {
+          name: 'Марія',
+          fatherName: 'Іванівна',
+          surname: 'Іванова',
+          sex: 'female'
+        },
+        {
+          name: 'Миколай',
+          fatherName: 'Іванович',
+          surname: 'Іванов',
+          age: 15
+        },
+        {
+          name: 'Петро',
+          fatherName: 'Іванович',
+          surname: 'Іванов',
+          married: true
+        }
+      ];
+
+      const columns = [];
+      persons.forEach((person) => {
+        for (const key in person) {
+          if (!columns.includes(key)) {
+            columns.push(key);
+          }
+        }
+      });
+
+      const table = document.createElement('table');
+      table.style.borderCollapse = 'collapse';
+
+      const thead = document.createElement('thead');
+      const trHead = document.createElement('tr');
+
+      columns.forEach((column) => {
+        const th = document.createElement('th');
+        th.textContent = column;
+        th.style.border = '1px solid black';
+        th.style.padding = '8px';
+        trHead.appendChild(th);
+      });
+
+      thead.appendChild(trHead);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+
+      persons.forEach((person) => {
+        const tr = document.createElement('tr');
+
+        columns.forEach((column) => {
+          const td = document.createElement('td');
+          td.textContent = person[column] || '';
+          td.style.border = '1px solid black';
+          td.style.padding = '8px';
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+
+      document.body.appendChild(table);
+    </script>
+  </body>
+</html>

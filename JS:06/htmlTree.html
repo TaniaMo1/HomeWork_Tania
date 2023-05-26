@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htmlTree</title>
+  </head>
+  <body>
+    <script>
+      var structure = {
+        tagName: "body",
+        children: [
+          {
+            tagName: "div",
+            children: [
+              {
+                tagName: "span",
+                children: ["Enter a data please:"]
+              },
+              {
+                tagName: "br"
+              },
+              {
+                tagName: "input",
+                attrs: {
+                  type: "text",
+                  id: "name"
+                }
+              },
+              {
+                tagName: "input",
+                attrs: {
+                  type: "text",
+                  id: "surname"
+                }
+              }
+            ]
+          },
+          {
+            tagName: "div",
+            children: [
+              {
+                tagName: "button",
+                attrs: {
+                  id: "ok"
+                },
+                children: ["OK"]
+              },
+              {
+                tagName: "button",
+                attrs: {
+                  id: "cancel"
+                },
+                children: ["Cancel"]
+              }
+            ]
+          }
+        ]
+      };
+      var buttonText = structure.children[1].children[1].children[0];
+      console.log(buttonText);
+      var inputId = structure.children[0].children[3].attrs.id;
+      console.log(inputId);
+    </script>
+  </body>
+</html>

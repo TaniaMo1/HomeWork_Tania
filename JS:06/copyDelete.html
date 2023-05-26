@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>copyDelete</title>
+  </head>
+  <body>
+    <script>
+      const dress = {
+        вид: "платье",
+        материал: "котон",
+        цвет: "белый",
+        размер: "S"
+      };
+
+      const { размер, ...rest } = dress;
+      const copy = { ...rest };
+
+      console.log(copy);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currencyTable</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        margin: 0 auto;
+      }
+  
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+  
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+  
+      caption {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <caption>Таблиця курсів валют</caption>
+      <thead>
+        <tr>
+          <th>Валюта</th>
+          <th colspan="5">Курс до інших валют</th>
+        </tr>
+      </thead>
+      <tbody id="currency-table-body"></tbody>
+    </table>
+  
+    <script>
+      fetch('https://open.er-api.com/v6/latest/USD')
+        .then(response => response.json())
+        .then(data => {
+          const currencies = Object.keys(data.rates);
+  
+          const tableBody = document.getElementById('currency-table-body');
+  
+          const headerRow = document.createElement('tr');
+  
+          const emptyHeaderCell = document.createElement('th');
+          headerRow.appendChild(emptyHeaderCell);
+  
+          currencies.forEach(targetCurrency => {
+            const headerCell = document.createElement('th');
+            headerCell.textContent = targetCurrency;
+            headerRow.appendChild(headerCell);
+          });
+  
+          tableBody.appendChild(headerRow);
+  
+          currencies.forEach(sourceCurrency => {
+            const row = document.createElement('tr');
+  
+            const currencyCell = document.createElement('td');
+            currencyCell.textContent = sourceCurrency;
+            row.appendChild(currencyCell);
+  
+            currencies.forEach(targetCurrency => {
+              const rate = data.rates[targetCurrency] / data.rates[sourceCurrency];
+  
+              const rateCell = document.createElement('td');
+              rateCell.textContent = rate.toFixed(4);
+              row.appendChild(rateCell);
+            });
+  
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.log('Помилка завантаження курсів валют:', error);
+        });
+    </script>
+  </body>
+</html>
