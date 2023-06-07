@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <script>
+      function myBind(func, context, defaultArgs) {
+        return function(...args) {
+          const mergedArgs = defaultArgs.map((arg, index) => (arg !== undefined ? arg : args[index]));
+          return func.apply(context, mergedArgs.concat(args.slice(defaultArgs.length)));
+        };
+      }
+
+      let pow5 = myBind(Math.pow, Math, [, 5]);
+      let cube = myBind(Math.pow, Math, [, 3]);
+      let chessMin = myBind(Math.min, Math, [, 4, , 5, , 8, , 9]);
+      let zeroPrompt = myBind(prompt, window, [undefined, "0"]);
+      const bindedJoiner = myBind((...params) => params.join(''), null, [, 'b', , , 'e', 'f']);
+
+      console.log(pow5(2)); // 32
+      console.log(pow5(4)); // 1024
+      console.log(cube(3)); // 27
+      console.log(chessMin(-1, -5, 3, 15)); // -5
+      console.log(zeroPrompt("Введіть число")); // Викликає prompt("Введіть число", "0")
+      console.log(bindedJoiner('a', 'c', 'd')); // 'abcdef'
+      console.log(bindedJoiner('1', '2', '3')); // '1b23ef'
+    </script>
+  </body>
+</html>

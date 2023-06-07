@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PersonForm</title>
+  </head>
+  <body>  
+    <div id="parentElement"></div>
+    <script>
+      function createPerson(name, surname) {
+        let age;
+        let fatherName;
+
+        function getName() {
+          return name;
+        }
+
+        function getSurname() {
+          return surname;
+        }
+
+        function getFatherName() {
+          return fatherName;
+        }
+
+        function getAge() {
+          return age;
+        }
+
+        function getFullName() {
+          let fullName = name + " " + surname;
+          if (fatherName) {
+            fullName += " " + fatherName;
+          }
+          return fullName;
+        }
+
+        function setName(newName) {
+          if (typeof newName === "string" && newName.length > 0) {
+            name = newName;
+            return name;
+          } else {
+            return name;
+          }
+        }
+
+        function setSurname(newSurname) {
+          if (typeof newSurname === "string" && newSurname.length > 0) {
+            surname = newSurname;
+            return surname;
+          } else {
+            return surname;
+          }
+        }
+
+        function setFatherName(newFatherName) {
+          if (typeof newFatherName === "string" && newFatherName.length > 0) {
+            fatherName = newFatherName;
+            return fatherName;
+          } else {
+            return fatherName;
+          }
+        }
+
+        function setAge(newAge) {
+          if (typeof newAge === "number" && newAge >= 0 && newAge <= 100) {
+            age = newAge;
+            return age;
+          } else {
+            return age;
+          }
+        }
+
+        function setFullName(fullName) {
+          const nameParts = fullName.split(" ");
+          if (nameParts.length >= 2) {
+            const [newName, newSurname, ...rest] = nameParts;
+            const newFatherName = rest.join(" ");
+            setName(newName);
+            setSurname(newSurname);
+            setFatherName(newFatherName);
+            return getFullName();
+          } else {
+            return getFullName();
+          }
+        }
+
+        return {
+          getName,
+          getSurname,
+          getFatherName,
+          getAge,
+          getFullName,
+          setName,
+          setSurname,
+          setFatherName,
+          setAge,
+          setFullName
+        };
+      }
+
+      function personForm(parent, person) {
+        const nameInput = document.createElement("input");
+        const surnameInput = document.createElement("input");
+        const fatherNameInput = document.createElement("input");
+        const ageInput = document.createElement("input");
+        const fullNameInput = document.createElement("input");
+
+        // Add inputs to the parent DOM element
+        parent.appendChild(nameInput);
+        parent.appendChild(surnameInput);
+        parent.appendChild(fatherNameInput);
+        parent.appendChild(ageInput);
+        parent.appendChild(fullNameInput);
+
+        nameInput.value = person.getName();
+        surnameInput.value = person.getSurname();
+        fatherNameInput.value = person.getFatherName();
+        ageInput.value = person.getAge();
+        fullNameInput.value = person.getFullName();
+
+        nameInput.oninput = () => {
+          const newName = nameInput.value;
+          const result = person.setName(newName);
+          nameInput.value = result;
+          fullNameInput.value = person.getFullName();
+        };
+
+        surnameInput.oninput = () => {
+          const newSurname = surnameInput.value;
+          const result = person.setSurname(newSurname);
+          surnameInput.value = result;
+          fullNameInput.value = person.getFullName();
+        };
+
+        fatherNameInput.oninput = () => {
+          const newFatherName = fatherNameInput.value;
+          const result = person.setFatherName(newFatherName);
+          fatherNameInput.value = result;
+          fullNameInput.value = person.getFullName();
+        };
+
+        ageInput.oninput = () => {
+          const newAge = parseInt(ageInput.value);
+          const result = person.setAge(newAge);
+          ageInput.value = result;
+        };
+
+        fullNameInput.oninput = () => {
+          const fullName = fullNameInput.value;
+          const result = person.setFullName(fullName);
+          fullNameInput.value = result;
+          nameInput.value = person.getName();
+          surnameInput.value = person.getSurname();
+          fatherNameInput.value = person.getFatherName();
+        };
+      }
+
+      const b = createPerson("Ганна", "Іванова");
+      b.setAge(15);
+      b.setFullName("Петрова Ганна Миколаївна");
+
+      const parentElement = document.getElementById("parentElement");
+      personForm(parentElement, b);
+    </script>
+  </body>
+</html>

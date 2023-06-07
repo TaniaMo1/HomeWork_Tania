@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <script>
+      function makeProfileTimer() {
+        const startTime = performance.now();
+
+        return function () {
+          const endTime = performance.now();
+          const duration = endTime - startTime;
+          return duration;
+        };
+      }
+
+      const timer = makeProfileTimer();
+      alert("Измеряем время работы этого alert");
+
+      const alertTime = timer();
+      alert(`Время работы alert: ${alertTime} мс`);
+
+      const timer2 = makeProfileTimer();
+      prompt("");
+
+      const promptAlertTime = timer ();
+      alert(`Время работы alert та prompt: ${promptAlertTime} мс`)
+
+      const promptTime = timer2();
+      alert(`Время работы prompt та предыдущего alert: ${promptTime} мс`);
+    </script>
+  </body>
+</html>

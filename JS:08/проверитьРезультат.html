@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <script>
+      function checkResult(original, validator) {
+        function wrapper(...params) {
+          let result;
+          do {
+            result = original.call(this, ...params);
+          } while (!validator(result));
+          return result;
+        }
+        
+        return wrapper;
+      }
+
+      const numberPrompt = checkResult(prompt, x => !isNaN(+x));
+      let number = +numberPrompt.call(window, "Введіть число", "0");
+
+      const gamePrompt = checkResult(prompt, x => ['камень', 'ножиці', 'папір'].includes(x.toLowerCase()));
+      const turn = gamePrompt.call(window, "Введіть щось зі списку: 'камень', 'ножиці', 'папір'");
+
+      const RandomHigh = checkResult(Math.random, x => x >= 0.5 && x <= 1);
+      const AlwaysSayYes = checkResult(confirm, x => x === true);
+      const respectMe = checkResult(prompt, x => x !== '');
+
+      const randomNum = RandomHigh();
+      const userConfirmation = AlwaysSayYes("Погоджуєтеся?");
+      const userInput = respectMe("Введіть щось");
+
+      console.log(randomNum);
+      console.log(userConfirmation);
+      console.log(userInput);
+    </script>
+  </body>
+</html>

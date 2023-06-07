@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arrowToFun</title>
+  </head>
+  <body>
+    <script>
+      function promptValue(promptMessage) {
+        return prompt(promptMessage);
+      }
+
+      function addPropertyToObject(obj, property, itemType) {
+        const value = promptValue(`Введіть значення для властивості "${property}" (${itemType}):`);
+        obj[property] = value;
+      }
+
+      const items = [
+        {
+          вид: "платье",
+          материал: "котон",
+          цвет: "белый",
+          размер: "S"
+        },
+        {
+          вид: "юбка",
+          материал: "джинс",
+          цвет: "синий",
+          размер: "М"
+        },
+        {
+          вид: "блуза",
+          материал: "лен",
+          цвет: "голубой",
+          размер: "S"
+        }
+      ];
+
+      const commonProperty = promptValue("Введіть назву спільної властивості:");
+      const itemType = promptValue("Введіть тип вида (платье, юбка, блуза):");
+
+      for (const item of items) {
+        addPropertyToObject(item, commonProperty, itemType);
+      }
+
+      console.log(items);
+
+      //другое задание
+      function promptValue(promptMessage) {
+        return prompt(promptMessage);
+      }
+
+      function addPropertyToObject(obj, promptMessage) {
+        const property = promptValue(promptMessage);
+        const value = promptValue(`Введіть значення для властивості ${property}:`);
+        obj[property] = value;
+      }
+
+      const items = [
+        {
+          вид: "платье",
+          материал: "котон",
+          цвет: "белый",
+          размер: "S"
+        },
+        {
+          вид: "юбка",
+          материал: "джинс",
+          цвет: "синий",
+          размер: "М"
+        },
+        {
+          вид: "блуза",
+          материал: "лен",
+          цвет: "голубой",
+          размер: "S"
+        }
+      ];
+
+      for (const item of items) {
+        for (let i = 1; i <= 2; i++) {
+          addPropertyToObject(item, `Введіть назву ${i}-ої властивості для ${item.вид}:`);
+        }
+      }
+
+      console.log(items);
+
+      //другое задание
+      var structure = {
+        tagName: "body",
+        children: [
+          {
+            tagName: "div",
+            children: [
+              {
+                tagName: "span",
+                children: ["Enter a data please:"]
+              },
+              {
+                tagName: "br"
+              },
+              {
+                tagName: "input",
+                attrs: {
+                  type: "text",
+                  id: "name"
+                }
+              },
+              {
+                tagName: "input",
+                attrs: {
+                  type: "text",
+                  id: "surname"
+                }
+              }
+            ]
+          },
+          {
+            tagName: "div",
+            children: [
+              {
+                tagName: "button",
+                attrs: {
+                  id: "ok"
+                },
+                children: ["OK"]
+              },
+              {
+                tagName: "button",
+                attrs: {
+                  id: "cancel"
+                },
+                children: ["Cancel"]
+              }
+            ]
+          }
+        ]
+      };
+
+      var buttonText = structure.children[1].children[1].children[0];
+      console.log(buttonText);
+
+      var inputId = structure.children[0].children[3].attrs.id;
+      console.log(inputId);
+
+      //другое задание
+      let arr = [1, 2, 3, 4, 5, "a", "b", "c"];
+
+      let evenArr = arr.filter(function(item) {
+        return typeof item === "number" && item % 2 === 0;
+      });
+      let oddArr = arr.filter(function(item) {
+        return typeof item === "number" && item % 2 !== 0;
+      });
+      let letterArr = arr.filter(function(item) {
+        return typeof item === "string";
+      });
+
+      let [even1, even2] = evenArr;
+      let [odd1, odd2, odd3] = oddArr;
+
+      console.log("Even numbers:", even1, even2);
+      console.log("Odd numbers:", odd1, odd2, odd3);
+      console.log("Letters:", letterArr);
+
+      //другое задание
+      const persons = [
+        {
+          name: 'Марія',
+          fatherName: 'Іванівна',
+          surname: 'Іванова',
+          sex: 'female'
+        },
+        {
+          name: 'Миколай',
+          fatherName: 'Іванович',
+          surname: 'Іванов',
+          age: 15
+        },
+        {
+          name: 'Петро',
+          fatherName: 'Іванович',
+          surname: 'Іванов',
+          married: true
+        }
+      ];
+
+      const columns = [];
+      persons.forEach(function(person) {
+        for (const key in person) {
+          if (!columns.includes(key)) {
+            columns.push(key);
+          }
+        }
+      });
+
+      const table = document.createElement('table');
+      table.style.borderCollapse = 'collapse';
+
+      const thead = document.createElement('thead');
+      const trHead = document.createElement('tr');
+
+      columns.forEach(function(column) {
+        const th = document.createElement('th');
+        th.textContent = column;
+        th.style.border = '1px solid black';
+        th.style.padding = '8px';
+        trHead.appendChild(th);
+      });
+
+      thead.appendChild(trHead);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+
+      persons.forEach(function(person) {
+        const tr = document.createElement('tr');
+
+        columns.forEach(function(column) {
+          const td = document.createElement('td');
+          td.textContent = person[column] || '';
+          td.style.border = '1px solid black';
+          td.style.padding = '8px';
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+
+      document.body.appendChild(table);
+    </script>
+  </body>
+</html>

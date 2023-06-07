@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>createPersonClosure</title>
+  </head>
+  <body>
+    <script>
+      function createPersonClosure(name, surname) {
+      let fatherName = '';
+      let age = 0;
+
+      function getName() {
+        return name;
+      }
+
+      function getSurname() {
+        return surname;
+      }
+
+      function getFatherName() {
+        return fatherName;
+      }
+
+      function getAge() {
+        return age;
+      }
+
+      function getFullName() {
+        return `${name} ${surname}`;
+      }
+
+      function setName(newName) {
+        if (typeof newName === 'string' && newName.length > 0) {
+          name = newName;
+        }
+        return name;
+      }
+
+      function setSurname(newSurname) {
+        if (typeof newSurname === 'string' && newSurname.length > 0) {
+          surname = newSurname;
+        }
+        return surname;
+      }
+
+      function setFatherName(newFatherName) {
+        if (typeof newFatherName === 'string' && newFatherName.length > 0) {
+          fatherName = newFatherName;
+        }
+        return fatherName;
+      }
+
+      function setAge(newAge) {
+        if (typeof newAge === 'number' && newAge >= 0 && newAge <= 100) {
+          age = newAge;
+        }
+        return age;
+      }
+
+      function setFullName(fullName) {
+        const parts = fullName.split(' ');
+        if (parts.length === 3) {
+          setName(parts[0]);
+          setSurname(parts[1]);
+          setFatherName(parts[2]);
+        }
+      }
+
+      return {
+        getName,
+        getSurname,
+        getFatherName,
+        getAge,
+        getFullName,
+        setName,
+        setSurname,
+        setFatherName,
+        setAge,
+        setFullName
+      };
+    }
+
+    const a = createPersonClosure("Вася", "Пупкін");
+    const b = createPersonClosure("Ганна", "Іванова");
+
+    console.log(a.getName()); // Вася
+    a.setAge(15);
+    a.setAge(150); // Не працює, age залишається 15
+
+    b.setFullName("Петрова Ганна Миколаївна");
+    console.log(b.getFatherName()); // Миколаївна
+    </script>
+  </body>
+</html>
