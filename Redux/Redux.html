@@ -45,6 +45,17 @@
     button:hover {
       background-color: #45a049;
     }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-group input {
+      flex: 1;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -107,6 +118,15 @@
                 alert("Недостаточно денег")
                 return {
                     ...state
+                }
+            }
+            if (what === 'Пиво' || what === 'Сигареты') {
+                const isPassportShown = confirm("Требуется предъявление паспорта. Поднесите паспорт к экрану.")
+                if (!isPassportShown) {
+                    alert("Покупка отменена. До свидания, приходите, когда исполнится 18!")
+                    return {
+                        ...state
+                    }
                 }
             }
             return {
