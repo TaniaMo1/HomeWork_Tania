@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    .form-container {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-input {
+      margin-bottom: 10px;
+    }
+    .form-button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-form" class="form-container">
+    <div class="form-input">
+      <label for="username">Username:</label>
+      <input type="text" id="username">
+    </div>
+    <div class="form-input">
+      <label for="password">Password:</label>
+      <div id="password-field"></div>
+    </div>
+    <button id="login-button" class="form-button" disabled>Login</button>
+  </div>
+
+  <script>
+    function Password(parent, open) {
+      const passwordInput = document.createElement('input');
+      passwordInput.type = open ? 'text' : 'password';
+      parent.appendChild(passwordInput);
+
+      this.getValue = () => passwordInput.value;
+
+      this.onChange = () => {};
+
+      let showPassword = open;
+      const togglePasswordVisibility = () => {
+        showPassword = !showPassword;
+        passwordInput.type = showPassword ? 'text' : 'password';
+      };
+
+      const visibilityButton = document.createElement('button');
+      visibilityButton.innerText = 'Toggle';
+      visibilityButton.addEventListener('click', togglePasswordVisibility);
+      parent.appendChild(visibilityButton);
+    }
+
+    let loginForm = document.getElementById('login-form');
+    let usernameInput = document.getElementById('username');
+    let passwordField = document.getElementById('password-field');
+    let loginButton = document.getElementById('login-button');
+
+    let password = new Password(passwordField, false);
+
+    password.onChange = () => {
+      checkFormValidity();
+    };
+
+    usernameInput.addEventListener('input', () => {
+      checkFormValidity();
+    });
+
+    function checkFormValidity() {
+      let username = usernameInput.value;
+      let passwordValue = password.getValue();
+
+      let isFormValid = username.trim() !== '' && passwordValue.trim() !== '';
+      loginButton.disabled = !isFormValid;
+    }
+
+    loginButton.addEventListener('click', () => {
+      let username = usernameInput.value;
+      let passwordValue = password.getValue();
+
+      // Действия при осуществлении логина
+
+      console.log('Username:', username);
+      console.log('Password:', passwordValue);
+    });
+  </script>
+</body>
+</html>

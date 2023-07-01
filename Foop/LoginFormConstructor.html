@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoginFormConstructor</title>
+  <style>
+    .form-container {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-input {
+      margin-bottom: 10px;
+    }
+    .form-button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-form" class="form-container">
+    <div class="form-input">
+      <label for="username">Username:</label>
+      <input type="text" id="username">
+    </div>
+    <div class="form-input">
+      <label for="password">Password:</label>
+      <div id="password-field"></div>
+    </div>
+    <button id="login-button" class="form-button" disabled>Login</button>
+  </div>
+
+  <script>
+    function Password(parent, open) {
+      const passwordInput = document.createElement('input');
+      passwordInput.type = open ? 'text' : 'password';
+      parent.appendChild(passwordInput);
+
+      let value = '';
+
+      Object.defineProperty(this, 'value', {
+        get: function() {
+          return value;
+        },
+        set: function(newValue) {
+          value = newValue;
+          this.onChange(value);
+        },
+        enumerable: true,
+        configurable: true
+      });
+
+      this.onChange = function() {};
+
+      let showPassword = open;
+      const togglePasswordVisibility = function() {
+        showPassword = !showPassword;
+        passwordInput.type = showPassword ? 'text' : 'password';
+      };
+
+      const visibilityButton = document.createElement('button');
+      visibilityButton.innerText = 'Toggle';
+      visibilityButton.addEventListener('click', togglePasswordVisibility);
+      parent.appendChild(visibilityButton);
+    }
+
+    function LoginForm() {
+      let loginForm = document.getElementById('login-form');
+      let usernameInput = document.getElementById('username');
+      let passwordField = document.getElementById('password-field');
+      let loginButton = document.getElementById('login-button');
+
+      let password = new Password(passwordField, false);
+
+      Object.defineProperty(this, 'username', {
+        get: function() {
+          return usernameInput.value;
+        },
+        enumerable: true,
+        configurable: true
+      });
+
+      Object.defineProperty(this, 'password', {
+        get: function() {
+          return password.value;
+        },
+        enumerable: true,
+        configurable: true
+      });
+
+      Object.defineProperty(this, 'loginButtonDisabled', {
+        set: function(value) {
+          loginButton.disabled = value;
+        },
+        enumerable: true,
+        configurable: true
+      });
+
+      password.onChange = function() {
+        this.checkFormValidity();
+      }.bind(this);
+
+      usernameInput.addEventListener('input', function() {
+        this.checkFormValidity();
+      }.bind(this));
+
+      this.checkFormValidity = function() {
+        let isFormValid = this.username.trim() !== '' && this.password.trim() !== '';
+        this.loginButtonDisabled = !isFormValid;
+      };
+
+      loginButton.addEventListener('click', function() {
+        // Действия при логине
+        console.log('Username:', this.username);
+        console.log('Password:', this.password);
+      }.bind(this));
+    }
+
+    const loginForm = new LoginForm();
+  </script>
+</body>
+</html>

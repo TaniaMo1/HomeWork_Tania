@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PersonPrototype</title>
+</head>
+<body>
+  <script>
+    function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+
+    Person.prototype.getFullName = function() {
+      return this.firstName + ' ' + this.lastName;
+    };
+
+    Object.defineProperty(Person.prototype, 'fatherName', {
+      get: function() {
+        return this.firstName + ' ' + this.lastName;
+      },
+      set: function(value) {
+        var names = value.split(' ');
+        if (names.length === 2) {
+          this.firstName = names[0];
+          this.lastName = names[1];
+        }
+      }
+    });
+
+    var a = new Person("Вася", "Пупкін");
+    var b = new Person("Ганна", "Іванова");
+    var c = new Person("Єлизавета", "Петрова");
+
+    console.log(a.getFullName()); // Вася Пупкін
+    a.fatherName = 'Іванович'; // Василь Іванович Пупкін
+
+    console.log(b.getFullName()); // Ганна Іванова
+  </script>
+</body>
+</html>

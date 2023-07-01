@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PersonConstructor</title>
+</head>
+<body>
+  <script>
+    function Person(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        
+        this.getFullName = function() {
+            return this.firstName + ' ' + this.lastName;
+    };
+    
+    Object.defineProperty(this, 'fatherName', {
+        get: function() {
+        return this.firstName + ' ' + this.lastName;
+        },
+        set: function(value) {
+        var names = value.split(' ');
+        if (names.length === 2) {
+            this.firstName = names[0];
+            this.lastName = names[1];
+        }
+        }
+    });
+    }
+
+    var a = new Person("Вася", "Пупкін");
+    var b = new Person("Ганна", "Іванова");
+    var c = new Person("Єлизавета", "Петрова");
+
+    console.log(a.getFullName());
+    a.fatherName = 'Іванович';
+
+    console.log(b.getFullName());
+  </script>
+</body>
+</html>

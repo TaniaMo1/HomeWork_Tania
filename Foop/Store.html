@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Киоск</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    select, input, button {
+      margin-top: 10px;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-group input {
+      flex: 1;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Киоск</h1>
+
+  <div id="container"></div>
+
+  <script>
+    let mainDiv = document.getElementById('container')
+
+    function Store(reducer, initialState) {
+      let state = reducer(initialState, {})
+      let sbs = []
+      let subscribe = sb => (sbs.push(sb), () => sbs = sbs.filter(x => x !== sb))
+      let getState = () => state
+      let dispatch = action => {
+        let newState = reducer(state, action)
+        if (newState !== state) {
+          state = newState
+          for (let sb of sbs) {
+            sb()
+          }
+        }
+      }
+      return {
+        getState,
+        dispatch,
+        subscribe
+      }
+    }
+
+    function reducer(state, { type, what, many, price, cash }) {
+      if (!state) {
+        return {
+          "Пиво": {
+            many: 100,
+            price: 30
+          },
+          "Чипсы": {
+            many: 100,
+            price: 70
+          },
+          "Сигареты": {
+            many: 100,
+            price: 50
+          },
+          "case": 0,
+          "cash": 0
+        }
+      }
+      let cost = many * price
+      if (many > state[what].many || state[what].many === 0) {
+        alert("Товар закончился :(")
+        return {
+          ...state,
+          [what]: { ...state[what], many: 0 }
+        }
+      }
+      if (type === "buy") {
+        if (cash < cost || !cash) {
+          alert("Недостаточно денег")
+          return {
+            ...state
+          }
+        }
+        if (what === 'Пиво' || what === 'Сигареты') {
+          const isPassportShown = confirm("Требуется предъявление паспорта. Поднесите паспорт к экрану.")
+          if (!isPassportShown) {
+            alert("Покупка отменена. До свидания, приходите, когда исполнится 18!")
+            return {
+              ...state
+            }
+          }
+        }
+        return {
+          ...state,
+          [what]: { ...state[what], many: state[what].many - many },
+          cash: state.cash,
+          "case": state["case"] + cost
+        }
+      }
+      return state
+    }
+
+    const initialState = null; // Змініть на відповідний початковий стан
+    const store = new Store(reducer, initialState);
+    const unsubscribe = store.subscribe(() => console.log(store.getState()))
+
+    function showState(parent, state) {
+      return parent.innerText = state
+    }
+
+    let texts = {}
+    let showNewState = () => {
+      let keyValues = Object.entries(store.getState()).forEach(([key, value]) => {
+        let { many, price } = value
+        if (key === 'case') {
+          document.title = [key + ':' + value]
+        }
+        if (key !== 'cash' && key !== 'case' && key !== 'many' && key !== 'price') {
+          let text = texts[key]
+          if (!text) {
+            text = document.createElement('p')
+            mainDiv.append(text)
+            texts[key] = text
+          }
+          let displayKeys = `${key} : ${many} штук Цена - ${price} грн`
+          showState(text, displayKeys)
+          console.log(texts)
+        }
+      })
+    }
+    showNewState()
+    store.subscribe(showNewState)
+
+    let storeKeys = Object.keys(store.getState())
+    let select = document.createElement('select')
+    let input = document.createElement('input')
+    let inputCash = document.createElement('input')
+    inputCash.type = 'number'
+    inputCash.placeholder = 'Введите сумму'
+    inputCash.onchange = () => {
+      let min = parseInt(inputCash.value)
+      if (min < 0) {
+        inputCash.value = 0
+      }
+    }
+    input.type = 'number'
+    input.placeholder = 'Введите кол-во'
+    input.onchange = () => {
+      let min = parseInt(input.value)
+      if (min < 0) {
+        input.value = 0
+      }
+    }
+    const button = document.createElement('button')
+    button.innerText = 'BUY'
+
+    mainDiv.append(select)
+    mainDiv.append(input)
+    mainDiv.append(inputCash)
+    mainDiv.append(button)
+
+    storeKeys.forEach(key => {
+      if (key !== 'case' && key !== 'cash') {
+        let option = document.createElement('option')
+        option.innerText = key
+        select.append(option)
+      }
+    })
+    button.onclick = () => {
+      if (select.value === 'Пиво') {
+        store.dispatch(actionBuyBeer(input.value, parseInt(inputCash.value)))
+      }
+      if (select.value === 'Чипсы') {
+        store.dispatch(actionBuyChips(input.value, parseInt(inputCash.value)))
+      }
+      if (select.value === 'Сигареты') {
+        store.dispatch(actionBuyCigars(input.value, parseInt(inputCash.value)))
+      }
+    }
+
+    let actionBuyBeer = (many, cash) => ({ type: 'buy', what: 'Пиво', many, price: 30, cash })
+    let actionBuyChips = (many, cash) => ({ type: 'buy', what: 'Чипсы', many, price: 70, cash })
+    let actionBuyCigars = (many, cash) => ({ type: 'buy', what: 'Сигареты', many, price: 50, cash })
+  </script>
+</body>
+</html>
