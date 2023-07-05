@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyStringify</title>
+</head>
+<body>
+  <script>
+    function stringify(value) {
+      if (typeof value === 'undefined') {
+        return 'null';
+      }
+
+      if (typeof value === 'function') {
+        return undefined;
+      }
+
+      if (value === null) {
+        return 'null';
+      }
+
+      if (typeof value === 'number' || typeof value === 'boolean') {
+        return value.toString();
+      }
+
+      if (typeof value === 'string') {
+        return '"' + value + '"';
+      }
+
+      if (Array.isArray(value)) {
+        const elements = value.map((element) => stringify(element));
+        return '[' + elements.join(',') + ']';
+      }
+
+      if (typeof value === 'object') {
+        const result = Object.keys(value).map((key) => {
+          const val = stringify(value[key]);
+          if (typeof val !== 'undefined') {
+            return '"' + key + '":' + val;
+          }
+          return undefined;
+        }).filter((item) => typeof item !== 'undefined');
+        return '{' + result.join(',') + '}';
+      }
+    }
+
+    const arr = [1, "string", null, undefined, { a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true }, true, false];
+    const jsonString = stringify(arr);
+    console.log(JSON.parse(jsonString));  // [1, "string", null, undefined, {a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true}, true, false]
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>getElById</title>
+</head>
+<body>
+  <script>
+function getElementById(idToFind) {
+  function walker(parent) {
+    for (let i = 0; i < parent.children.length; i++) {
+      const child = parent.children[i];
+
+      if (child.id === idToFind) {
+        throw child;
+      }
+
+      walker(child);
+    }
+  }
+
+  try {
+    walker(document.body);
+  } catch (element) {
+    return element;
+  }
+
+  return null;
+}
+
+const element = getElementById('yourId');
+console.log(element); //null, если не найдено
+
+  </script>
+</body>
+</html>

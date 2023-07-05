@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeepCopy</title>
+</head>
+<body>
+  <script>
+      function deepCopy(obj) {
+        if (typeof obj !== 'object' || obj === null) {
+          return obj;
+        }
+
+        const clone = Array.isArray(obj) ? [] : {};
+
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            clone[key] = deepCopy(obj[key]);
+          }
+        }
+
+        return clone;
+      }
+
+      const arr = [1, "string", null, undefined, { a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true }, true, false];
+      const arr2 = deepCopy(arr);
+
+      console.log(arr);   // [1, "string", null, undefined, {a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true}, true, false]
+      console.log(arr2);  // [1, "string", null, undefined, {a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true}, true, false]
+
+      arr2[0] = 100;
+      arr2[4].a = 99;
+      console.log(arr);   // [1, "string", null, undefined, {a: 15, b: 10, c: [1, 2, 3, 4], d: undefined, e: true}, true, false]
+      console.log(arr2);  // [100, "string", null, undefined, {a: 99, b: 10, c: [1, 2, 3, 4], d: undefined, e: true}, true, false]
+  </script>
+</body>
+</html>
