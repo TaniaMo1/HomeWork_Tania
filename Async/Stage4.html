@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Client</title>
+  </head>
+  <body>
+    <div id="chat-container"></div>
+
+    <div id="messages-container"></div>
+
+    <input type="text" id="nickname-input" placeholder="Ваш никнейм">
+    <input type="text" id="message-input" placeholder="Введите сообщение">
+    <button id="send-button">Отправить</button>
+
+    <script>
+      let nextMessageId = 0;
+
+      function jsonPost(url, data) {
+        return new Promise((resolve, reject) => {
+          var x = new XMLHttpRequest();
+          x.onerror = () => reject(new Error('jsonPost failed'))
+          x.open("POST", url, true);
+          x.send(JSON.stringify(data))
+    
+          x.onreadystatechange = () => {
+            if (x.readyState == XMLHttpRequest.DONE && x.status == 200) {
+              resolve(JSON.parse(x.responseText))
+            } else if (x.status != 200) {
+              reject(new Error('status is not 200'))
+            }
+          }
+        })
+      }
+
+      // Функция для добавления нового сообщения в чат
+      async function addMessage() {
+        const nickname = document.getElementById("nickname-input").value;
+        const message = document.getElementById("message-input").value;
+
+        try {
+          const response = await jsonPost("http://students.a-level.com.ua:10012", {
+            func: "addMessage",
+            nick: nickname,
+            message,
+          });
+
+          console.log(response);
+          document.getElementById("message-input").value = "";
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // Функция для получения новых сообщений из чата
+      async function getNewMessages() {
+        try {
+          const response = await jsonPost("http://students.a-level.com.ua:10012", {
+            func: "getMessages",
+            messageId: nextMessageId,
+          });
+
+          console.log(response);
+
+          const messagesContainer = document.getElementById("messages-container");
+          response.data.forEach((msg) => {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+
+            const nicknameElement = document.createElement("div");
+            nicknameElement.classList.add("nickname");
+            nicknameElement.textContent = msg.nick;
+
+            const messageContentElement = document.createElement("div");
+            messageContentElement.classList.add("message-content");
+            messageContentElement.textContent = msg.message;
+
+            const timestampElement = document.createElement("div");
+            timestampElement.classList.add("timestamp");
+            timestampElement.textContent = new Date(msg.timestamp).toLocaleString();
+
+            messageElement.appendChild(nicknameElement);
+            messageElement.appendChild(messageContentElement);
+            messageElement.appendChild(timestampElement);
+
+            messagesContainer.appendChild(messageElement);
+          });
+
+          // Обновление значения nextMessageId
+          nextMessageId = response.nextMessageId;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // Обработчик события нажатия кнопки отправки
+      document.getElementById("send-button").addEventListener("click", addMessage);
+
+      // Периодическая проверка новых сообщений каждые 2-5 секунд
+      setInterval(getNewMessages, getRandomInterval(2000, 5000));
+
+      // Функция для генерации случайного интервала
+      function getRandomInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+
+    <style>
+      .message {
+        border: 1px solid black;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      .nickname {
+        font-weight: bold;
+      }
+      .message-content {
+        margin-top: 5px;
+      }
+      .timestamp {
+        font-size: 12px;
+        color: gray;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promisify:LoginForm</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .fetch-button {
+      padding: 4px 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="table-container"></div>
+
+  <script>
+    function displayJSONTable(domElement, jsonData) {
+      domElement.innerHTML = '';
+
+      const table = document.createElement('table');
+
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+
+      const keys = Object.keys(jsonData);
+      for (const key of keys) {
+        const th = document.createElement('th');
+        th.textContent = key;
+        headerRow.appendChild(th);
+      }
+
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      const dataRow = document.createElement('tr');
+
+      for (const key of keys) {
+        const td = document.createElement('td');
+        const value = jsonData[key];
+
+        if (typeof value === 'string') {
+          if (value.includes('https://swapi.dev/api/')) {
+            const button = document.createElement('button');
+            button.classList.add('fetch-button');
+            button.textContent = value;
+            button.addEventListener('click', () => {
+              fetch(value)
+                .then(res => res.json())
+                .then(data => {
+                  displayJSONTable(td, data);
+                })
+                .catch(error => {
+                  console.log('An error occurred:', error);
+                });
+            });
+
+            td.appendChild(button);
+          } else {
+            td.textContent = value;
+          }
+        } else if (Array.isArray(value)) {
+          for (const item of value) {
+            const itemElement = document.createElement('div');
+            if (typeof item === 'string' && item.includes('https://swapi.dev/api/')) {
+              const button = document.createElement('button');
+              button.classList.add('fetch-button');
+              button.textContent = item;
+              button.addEventListener('click', () => {
+                fetch(item)
+                  .then(res => res.json())
+                  .then(data => {
+                    displayJSONTable(itemElement, data);
+                  })
+                  .catch(error => {
+                    console.log('An error occurred:', error);
+                  });
+              });
+
+              itemElement.appendChild(button);
+            } else {
+              itemElement.textContent = item;
+            }
+            td.appendChild(itemElement);
+          }
+        }
+
+        dataRow.appendChild(td);
+      }
+
+      tbody.appendChild(dataRow);
+      table.appendChild(tbody);
+
+      domElement.appendChild(table);
+    }
+
+    const lukeUrl = 'https://swapi.dev/api/people/1/';
+
+    fetch(lukeUrl)
+      .then(res => res.json())
+      .then(luke => {
+        const tableContainer = document.getElementById('table-container');
+        displayJSONTable(tableContainer, luke);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error);
+      });
+
+    function confirmPromise(text) {
+      return new Promise((resolve, reject) => {
+        const result = confirm(text);
+        if (result) {
+          resolve();
+        } else {
+          reject();
+        }
+      });
+    }
+
+    confirmPromise('Проміси це складно?')
+      .then(() => console.log('Не так вже й складно'))
+      .catch(() => console.log('Respect за посидючість і уважність'));
+
+    function promptPromise(text) {
+      return new Promise((resolve, reject) => {
+        const result = prompt(text);
+        if (result !== null) {
+          resolve(result);
+        } else {
+          reject();
+        }
+      });
+    }
+
+    promptPromise("Як тебе звуть?")
+      .then(name => console.log(`Тебе звуть ${name}`))
+      .catch(() => console.log('Ну навіщо морозитися, нормально ж спілкувалися'));
+  </script>
+</body>
+</html>

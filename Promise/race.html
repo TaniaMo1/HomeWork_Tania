@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>race</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .fetch-button {
+      padding: 4px 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="table-container"></div>
+
+  <script>
+    function myfetch(url) {
+      return new Promise((resolve, reject) => {
+        fetch(url)
+          .then(res => res.json())
+          .then(data => resolve(data))
+          .catch(error => reject(error));
+      });
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function displayResult(message) {
+      const tableContainer = document.getElementById('table-container');
+      const table = document.createElement('table');
+
+      const tbody = document.createElement('tbody');
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.textContent = message;
+      row.appendChild(cell);
+      tbody.appendChild(row);
+      table.appendChild(tbody);
+
+      tableContainer.innerHTML = '';
+
+      tableContainer.appendChild(table);
+    }
+
+    const delayTime = 500; // Задержка в 500 мс
+    const lukeUrl = 'https://swapi.dev/api/people/1/';
+
+    Promise.race([myfetch(lukeUrl), delay(delayTime)])
+      .then(result => {
+        let message;
+        if (result instanceof Error) {
+          message = 'myfetch was faster';
+        } else {
+          message = 'delay was faster';
+        }
+
+        displayResult(message);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error);
+      });
+  </script>
+</body>
+</html>

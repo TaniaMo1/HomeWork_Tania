@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Client</title>
+  </head>
+  <body>
+    <div id="chat-container"></div>
+
+    <input type="text" id="nickname-input" placeholder="Ваш никнейм">
+    <input type="text" id="message-input" placeholder="Введите сообщение">
+    <button id="send-button">Отправить</button>
+
+    <script>
+      function jsonPost(url, data) {
+        return new Promise((resolve, reject) => {
+          var x = new XMLHttpRequest();
+          x.onerror = () => reject(new Error('jsonPost failed'))
+          x.open("POST", url, true);
+          x.send(JSON.stringify(data))
+    
+          x.onreadystatechange = () => {
+            if (x.readyState == XMLHttpRequest.DONE && x.status == 200) {
+              resolve(JSON.parse(x.responseText))
+            } else if (x.status != 200) {
+              reject(new Error('status is not 200'))
+            }
+          }
+        })
+      }
+
+      // Функция для добавления нового сообщения в чат
+      async function addMessage() {
+        const nickname = document.getElementById("nickname-input").value;
+        const message = document.getElementById("message-input").value;
+
+        try {
+          const response = await jsonPost("http://students.a-level.com.ua:10012", {
+            func: "addMessage",
+            nick: nickname,
+            message,
+          });
+
+          console.log(response);
+          document.getElementById("message-input").value = "";
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // Функция для получения сообщений из чата
+      async function getMessages(messageId) {
+        try {
+          const response = await jsonPost("http://students.a-level.com.ua:10012", {
+            func: "getMessages",
+            messageId,
+          });
+          console.log(response);
+          // Обработка полученных сообщений и отображение на странице
+          response.data.forEach((msg) => {
+            const messageElement = document.createElement("div");
+            messageElement.textContent = `${msg.nick}: ${msg.message}`;
+            document.getElementById("chat-container").appendChild(messageElement);
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // Обработчик события нажатия кнопки отправки
+      document.getElementById("send-button").addEventListener("click", addMessage);
+
+      // Использование
+      getMessages(0);
+    </script>
+  </body>
+</html>
