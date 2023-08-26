@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speedtest</title>
+</head>
+<body>
+    <h1>Speedtest</h1>
+    <button onclick="runSpeedtest()">Run Speedtest</button>
+
+    <script>
+        async function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function speedtest(getPromise, count, parallel = 1) {
+            const start = Date.now();
+            let totalDuration = 0;
+
+            for (let i = 0; i < count; i++) {
+                const promises = Array.from({ length: parallel }, getPromise);
+                await Promise.all(promises);
+                totalDuration += Date.now() - start;
+            }
+
+            const duration = Date.now() - start;
+            const queryDuration = totalDuration / (count * parallel);
+            const querySpeed = 1 / queryDuration;
+            const parallelDuration = totalDuration / count;
+            const parallelSpeed = parallel / parallelDuration;
+
+            return {
+                duration,
+                querySpeed,
+                queryDuration,
+                parallelSpeed,
+                parallelDuration,
+            };
+        }
+
+        async function runSpeedtest() {
+            try {
+                const result = await speedtest(() => delay(1000), 10, 10);
+                console.log(result);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>

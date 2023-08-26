@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gql</title>
+</head>
+<body>
+
+    <script>
+        async function gql(endpoint, query, variables) {
+        try {
+            const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({ query, variables }),
+            });
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error executing GraphQL query:", error);
+            throw error;
+        }
+        }
+
+        // Використання
+        (async () => {
+        const catQuery = `query cats($q: String){
+            CategoryFind(query: $q){
+            _id
+            name
+            }
+        }`;
+
+        const cats = await gql(
+            "http://shop-roles.node.ed.asmer.org.ua/graphql",
+            catQuery,
+            { q: "[{}]" }
+        );
+        console.log(cats); //список категорій з _id name та ін
+
+        const loginQuery = `query login($login:String, $password:String){
+            login(login:$login, password:$password)
+        }`;
+
+        const token = await gql("http://shop-roles.node.ed.asmer.org.ua/graphql", loginQuery, {
+            login: "test457",
+            password: "123123",
+        });
+        console.log(token);
+        })();
+    </script>
+</body>
+</html>

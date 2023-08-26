@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedestrian Traffic Light</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .light-container {
+            display: flex;
+        }
+
+        .light {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #red {
+            background-color: #ff4d4d;
+        }
+
+        #green {
+            background-color: #85e085;
+        }
+    </style>
+</head>
+<body>
+    <div class="light-container">
+        <div class="light" id="red"></div>
+        <div class="light" id="green"></div>
+    </div>
+
+    <script>
+        const delay = ms => new Promise(ok => setTimeout(ok, ms));
+
+        async function pedestrianTrafficLight() {
+            const redLight = document.getElementById('red');
+            const greenLight = document.getElementById('green');
+
+            while (true) {
+                // Вкл червоний
+                redLight.style.backgroundColor = 'red';
+                greenLight.style.backgroundColor = 'gray';
+                await delay(5000); // 5 секунд
+
+                // Вкл зелений
+                redLight.style.backgroundColor = 'gray';
+                greenLight.style.backgroundColor = 'green';
+                await delay(3000); // 3 секунди
+            }
+        }
+
+        // Вкл симуляцію світлофора для пішоходів
+        pedestrianTrafficLight();
+    </script>
+</body>
+</html>

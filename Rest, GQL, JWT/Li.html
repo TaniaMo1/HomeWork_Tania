@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Light Simulation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .light-container {
+            display: flex;
+        }
+
+        .light {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #red {
+            background-color: #ff4d4d;
+        }
+
+        #yellow {
+            background-color: #ffd966;
+        }
+
+        #green {
+            background-color: #85e085;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Traffic Light Simulation</h1>
+        <div class="light-container">
+            <div class="light" id="red"></div>
+            <div class="light" id="yellow"></div>
+            <div class="light" id="green"></div>
+        </div>
+    </div>
+
+    <script>
+        const delay = ms => new Promise(ok => setTimeout(ok, ms));
+
+        async function trafficLight() {
+            const redLight = document.getElementById('red');
+            const yellowLight = document.getElementById('yellow');
+            const greenLight = document.getElementById('green');
+
+            while (true) {
+                // Вкл зеленый
+                redLight.style.backgroundColor = 'gray';
+                yellowLight.style.backgroundColor = 'gray';
+                greenLight.style.backgroundColor = 'green';
+                await delay(3000); // час зеленого - 3 секунди
+
+                // Вкл желтый
+                redLight.style.backgroundColor = 'gray';
+                yellowLight.style.backgroundColor = 'yellow';
+                greenLight.style.backgroundColor = 'gray';
+                await delay(1000); // час жовтого - 1 секунда
+
+                // Вкл красный
+                redLight.style.backgroundColor = 'red';
+                yellowLight.style.backgroundColor = 'gray';
+                greenLight.style.backgroundColor = 'gray';
+                await delay(3000); // час червоного - 3 секунди
+
+                // Вкл желтый
+                redLight.style.backgroundColor = 'gray';
+                yellowLight.style.backgroundColor = 'yellow';
+                greenLight.style.backgroundColor = 'gray';
+                await delay(1000); // час жовтого - 1 секунда
+            }
+        }
+
+        // Вкл симуляцию светофора
+        trafficLight();
+    </script>
+</body>
+</html>
