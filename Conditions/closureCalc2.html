@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валютний конвертер</title>
+</head>
+<body>
+    <select id='from'></select> <!-- Вихідна валюта -->
+    <select id='to'></select> <!-- Валюта в яку відбувається обмін -->
+    <div id='rate'></div> <!-- Кроскурс між валютами -->
+    <input type='number' id='amount' /> <!-- Сума у вихідній валюті -->
+    <div id='result'></div> <!-- Сума у валюті, в яку хочемо поміняти -->
+
+    <script>
+        const fromSelect = document.getElementById('from');
+        const toSelect = document.getElementById('to');
+        const rateDiv = document.getElementById('rate');
+        const amountInput = document.getElementById('amount');
+        const resultDiv = document.getElementById('result');
+
+        // Об'єкт з курсами валют
+        const rates = {
+            USD: 1,
+            EUR: 0.85,
+            GBP: 0.72,
+            JPY: 110.15,
+            AUD: 1.35,
+            CAD: 1.25,
+        };
+
+        // Наповнення випадаючих списків option-ами
+        for (const currency in rates) {
+            if (rates.hasOwnProperty(currency)) {
+                const optionFrom = document.createElement('option');
+                const optionTo = document.createElement('option');
+                optionFrom.value = currency;
+                optionTo.value = currency;
+                optionFrom.innerText = currency;
+                optionTo.innerText = currency;
+                fromSelect.appendChild(optionFrom);
+                toSelect.appendChild(optionTo);
+            }
+        }
+
+        // Обробник події для вибору валюти "from"
+        fromSelect.onchange = () => {
+            updateResult();
+        };
+
+        // Обробник події для вибору валюти "to"
+        toSelect.onchange = () => {
+            updateResult();
+        };
+
+        // Обробник події для введення суми
+        amountInput.oninput = () => {
+            updateResult();
+        };
+
+        // Оновлення результату обміну
+        function updateResult() {
+            const fromCurrency = fromSelect.value;
+            const toCurrency = toSelect.value;
+            const amount = parseFloat(amountInput.value);
+
+            if (!isNaN(amount)) {
+                const exchangeRate = rates[toCurrency] / rates[fromCurrency];
+                const result = (amount * exchangeRate).toFixed(2);
+                rateDiv.innerText = `Курс: 1 ${fromCurrency} = ${exchangeRate.toFixed(2)} ${toCurrency}`;
+                resultDiv.innerText = `${amount} ${fromCurrency} = ${result} ${toCurrency}`;
+            } else {
+                rateDiv.innerText = '';
+                resultDiv.innerText = '';
+            }
+        }
+
+        // Викликаємо оновлення результату при завантаженні сторінки
+        updateResult();
+    </script>
+</body>
+</html>

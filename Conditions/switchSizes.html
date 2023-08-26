@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>switchSizes</title>
+</head>
+<body>
+    <script>
+        var type = prompt("Выберите тип одежды: верхняя одежда, женское белье, чулки и носки");
+        var size = +prompt("Введите размер (Украина)");
+
+        switch (type) {
+        case "верхняя одежда":
+            switch (true) {
+            case size >= 40:
+                alert("Размер S в международной системе");
+                break;
+            case size >= 42 && size <= 44:
+                alert("Размер М в международной системе");
+                break;
+            case size >= 46 && size <= 48:
+                alert("Размер L в международной системе");
+                break;
+            case size >= 50 && size <= 52:
+                alert("Размер XL в международной системе");
+                break;
+            case size === 54:
+                alert("Размер XXL в международной системе");
+                break;
+            default:
+                alert("Размер не найден в американской системе");
+            }
+            break;
+        case "женское белье":
+            switch (true) {
+            case size <= 42:
+                alert("Размер XXS в международной системе");
+                break;
+            case size <= 44:
+                alert("Размер XS в международной системе");
+                break;
+            case size <= 46:
+                alert("Размер S в международной системе");
+                break;
+            case size <= 48:
+                alert("Размер М в международной системе");
+                break;
+            case size <= 50:
+                alert("Размер L в международной системе");
+                break;
+            case size <= 52:
+                alert("Размер XL в международной системе");
+                break;
+            case size <= 54:
+                alert("Размер XXL в международной системе");
+                break;
+            case size <= 56:
+                alert("Размер XXXL в международной системе");
+                break;
+            default:
+                alert("Размер не найден в международной системе");
+            }
+            break;
+        case "чулки и носки":
+            switch (true) {
+            case size >= 21:
+                alert("Размер 8 в американской системе");
+                break;
+            case size >= 23:
+                alert("Размер 9 в американской системе");
+                break;
+            case size >= 25:
+                alert("Размер 10 в американской системе");
+                break;
+            case size >= 27:
+                alert("Размер 11 в американской системе");
+                break;
+            default:
+                alert("Размер не найден в американской системе");
+            }
+            break;
+        default:
+            alert("Некорректный тип одежды");
+        }
+    </script>
+</body>
+</html>

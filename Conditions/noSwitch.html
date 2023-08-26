@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>noSwitch</title>
+</head>
+<body>
+    <script>
+        const noSwitch = (drink, cases, defaultKey = 'default') => {
+            if (drink in cases) {
+                cases[drink]();
+            } else if (defaultKey in cases) {
+                cases[defaultKey]();
+            } else {
+                console.log('Щось я не зрозумів');
+            }
+        };
+
+        const drink = prompt("Що ви любите пити?");
+
+        noSwitch(drink, {
+            воду: () => console.log('Найздоровіший вибір!'),
+            чай: () => {
+                console.log('Смачна та корисна штука. Не перестарайтеся з цукром');
+            },
+            пиво: () => console.log('Добре влітку, та в міру'),
+            віскі: () => {
+                console.log('Та ви, батечку, естет! Не забудьте лід і сигару');
+            },
+            default: () => {
+                console.log('Щось я не зрозумів');
+            }
+        });
+    </script>
+</body>
+</html>

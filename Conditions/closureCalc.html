@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>closureCalc</title>
+</head>
+<body>
+    <div id="currency-container"></div>
+
+    <script>
+        fetch('https://open.er-api.com/v6/latest/USD')
+            .then(res => res.json())
+            .then(data => {
+
+                const container = document.getElementById('currency-container');
+
+                for (const currency in data.rates) {
+                    if (data.rates.hasOwnProperty(currency)) {
+                        const button = document.createElement('button');
+                        button.innerText = currency;
+
+                        button.onclick = () => {
+                            const amount = parseFloat(prompt(`Введіть суму в ${currency}:`));
+                            if (!isNaN(amount)) {
+                                const convertedAmount = amount / data.rates[currency];
+                                alert(`${amount} ${currency} = ${convertedAmount.toFixed(2)} USD`);
+                            } else {
+                                alert('Будь ласка, введіть коректну суму.');
+                            }
+                        };
+
+                        container.appendChild(button);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Помилка при завантаженні даних:', error);
+            });
+    </script>
+</body>
+</html>

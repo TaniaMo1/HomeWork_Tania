@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вибір країни та міста</title>
+</head>
+<body>
+    <select id='countries'></select> <!-- Вибір країни -->
+    <select id='cities'></select> <!-- Вибір міста -->
+
+    <script>
+        const countriesSelect = document.getElementById('countries');
+        const citiesSelect = document.getElementById('cities');
+
+        // Завантаження списку країн і міст з сервера
+        fetch('https://raw.githubusercontent.com/russ666/all-countries-and-cities-json/master/countries.min.json')
+            .then(res => res.json())
+            .then(data => {
+                // Додавання країн у список
+                for (const country in data) {
+                    if (data.hasOwnProperty(country)) {
+                        const option = document.createElement('option');
+                        option.value = country;
+                        option.innerText = country;
+                        countriesSelect.appendChild(option);
+                    }
+                }
+
+                // Обробник події при зміні країни
+                countriesSelect.onchange = () => {
+                    const selectedCountry = countriesSelect.value;
+                    const cities = data[selectedCountry] || [];
+
+                    // Очищення списку міст
+                    citiesSelect.innerHTML = '';
+
+                    // Додавання міст у список
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.innerText = city;
+                        citiesSelect.appendChild(option);
+                    });
+                };
+            });
+    </script>
+</body>
+</html>
